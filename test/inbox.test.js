@@ -3,27 +3,17 @@ const ganache = require('ganache-cli');
 const Web3 = require('web3');
 const web3 = new Web3(ganache.provider());
 
-class Car{
-    park(){
-        return 'stopped';
-    }
+let accounts;
 
-    drive(){
-        return 'vroom';
-    }
-}
-
-let car;
-beforeEach(()=>{
-    car = new Car();
+beforeEach(async () => {
+    // Get a  list of all accounts
+    accounts = await web3.eth.getAccounts(); 
+        
+    //Use one of those accounts to deploy the contract
 });
 
-describe('Car', () => { 
-    it('can park', () => {
-        assert.equal(car.park(), 'stopped');
+describe('Inbox', ()=>{
+    it('deploy a contract', ()=>{
+        console.log(accounts);
     });
-
-    it('can drive', () => {
-        assert.equal(car.drive(), 'vroom');
-    });
-})
+});
